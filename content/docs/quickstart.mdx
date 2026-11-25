@@ -1,0 +1,41 @@
+---
+title: "Quickstart"
+description: "Scan a repository, then patch it and check parity."
+---
+
+> Breakline is in early development. Commands and file formats may change.
+
+## 1. Scan
+
+Run the scanner at the root of your repository. It reads files and changes nothing.
+
+```bash
+npx breakline scan .
+```
+
+Each finding shows the file, line, model or API, effective date and days left.
+
+## 2. Choose replacements
+
+Add `.breakline/policy.yaml` and map each retiring model to the one you want to test.
+
+```yaml
+replacements:
+  gpt-4o-2024-08-06: gpt-5.4-mini
+rules:
+  - match: {path: "*"}
+    action: allow
+```
+
+## 3. Add fixtures
+
+Save a few real prompts and the outputs you rely on in `.breakline/fixtures/`. See [Fixtures](/docs/fixtures).
+
+## 4. Run
+
+```bash
+export OPENAI_API_KEY=...
+npx breakline run . --live --out breakline-out
+```
+
+This writes `pr_body.md`, `patch.diff` and `result.json`. Your files stay unchanged unless you add `--write`.

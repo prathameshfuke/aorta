@@ -1,0 +1,14 @@
+---
+title: "Prices"
+description: "Token prices used for the cost comparison."
+---
+
+Breakline computes cost from `.breakline/prices.yaml`, in USD per 1M tokens.
+
+```yaml
+# Example numbers only. Copy current prices from your provider.
+gpt-4o-2024-08-06: {input_per_1m: 2.50, output_per_1m: 10.00}
+gpt-5.4-mini:      {input_per_1m: 0.40, output_per_1m: 1.60}
+```
+
+A model missing from the file is costed at zero, so add both the old and the new model.

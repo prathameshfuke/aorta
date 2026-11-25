@@ -1,0 +1,32 @@
+---
+title: "GitHub Action"
+description: "Run Breakline weekly on your own runner."
+---
+
+> The package source below is a placeholder until the first public release.
+
+```yaml
+name: breakline
+on:
+  schedule: [{cron: "17 3 * * 1"}]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write        # push the breakline/* branch
+  pull-requests: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - name: Scan, patch and check parity
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npx breakline run . --write --live --out breakline-out
+```
+
+Exit code `2` means parity failed. Open the pull request as a draft in that case.

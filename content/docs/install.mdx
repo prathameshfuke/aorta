@@ -1,0 +1,25 @@
+---
+title: "Install the GitHub App"
+description: "Give Breakline a branch to work on and nothing more."
+---
+
+> The public GitHub App listing is not live yet. Until it is, use the [GitHub Action](/docs/github-action), or email us for early access.
+
+## What you grant
+
+| Permission | Access | Used for |
+| --- | --- | --- |
+| Contents | Read and write | Push patches to `breakline/*` branches |
+| Pull requests | Read and write | Open and update the report |
+| Metadata | Read | Required by GitHub |
+
+## Limit writes to breakline branches
+
+GitHub cannot scope the contents permission to a branch prefix. Breakline only pushes to `breakline/*`. To have GitHub enforce it, add a ruleset that blocks the app from updating any other branch.
+
+## Steps
+
+1. Install the app and select the repositories.
+2. Add your provider keys as repository secrets.
+3. Commit `.breakline/policy.yaml`.
+4. Run the workflow once by hand to check the output.

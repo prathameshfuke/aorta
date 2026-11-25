@@ -1,0 +1,20 @@
+---
+title: "FAQ"
+description: "Short answers to common questions."
+---
+
+## Does anything leave my runner?
+
+Code, prompts and keys stay on the runner. Replay calls go from the runner to your model provider.
+
+## Does an AI decide whether a migration is safe?
+
+No. Schema, label, numeric and cost checks are deterministic, and they decide the result.
+
+## What if there is no codemod for a finding?
+
+Breakline reports it as needing a human. Shopify token changes are handled this way.
+
+## Which languages are scanned?
+
+Python and JavaScript/TypeScript, plus config and env files.

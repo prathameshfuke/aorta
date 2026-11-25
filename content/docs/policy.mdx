@@ -1,0 +1,39 @@
+---
+title: "Policy file"
+description: "Decide what Breakline may change, and what passing means."
+---
+
+`.breakline/policy.yaml` lives in your repository. It is reviewed like any other code.
+
+```yaml
+# You pick the target model.
+replacements:
+  gpt-4o-2024-08-06: gpt-5.4-mini
+  claude-opus-4-5-20251101: claude-opus-5-5
+
+rules:                       # first match wins; default is ask
+  - match: {path: "app/billing/*"}
+    action: deny             # report it, never edit it
+  - match: {provider: anthropic}
+    action: ask              # a human approves before merge
+  - match: {path: "*"}
+    action: allow
+
+parity:
+  min_schema_valid: 1.0
+  min_label_agreement: 0.95
+  max_numeric_drift: 0.05
+  max_cost_increase: 0.25
+```
+
+## Actions
+
+| Action | Behaviour |
+| --- | --- |
+| `allow` | Patch the call site |
+| `ask` | Patch it, and require human approval before merge |
+| `deny` | Report it and leave the file untouched |
+
+## Thresholds
+
+All four are fractions. `0.95` means 95%. A result outside any threshold marks the report as failed.

@@ -1,0 +1,32 @@
+---
+title: "CLI"
+description: "Commands, flags and exit codes."
+---
+
+## Commands
+
+```bash
+npx breakline scan <repo>   # list affected call sites
+npx breakline run <repo>    # scan, patch, replay, write the report
+```
+
+## Options
+
+| Flag | Command | Effect |
+| --- | --- | --- |
+| `--fail-on-findings` | `scan` | Exit with code 1 when anything is found |
+| `--live` | `run` | Replay fixtures against real model endpoints |
+| `--write` | `run` | Apply the patch to your files |
+| `--out <dir>` | `run` | Output directory, default `breakline-out` |
+| `--registry <file>` | both | Use your own change registry (place before the command) |
+| `--today <date>` | both | Override today's date (place before the command) |
+
+Without `--live`, `run` uses a simulator for offline demos. Its results say nothing about a real model.
+
+## Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Completed, no parity failure |
+| `1` | Findings present and `--fail-on-findings` set |
+| `2` | Parity failed: keep the pull request in draft |

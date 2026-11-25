@@ -1,0 +1,7 @@
+breakline
+logo
+out
+.next
+node_modules
+.env*
+.DS_Store

@@ -1,0 +1,24 @@
+---
+title: "Fixtures"
+description: "Recorded prompts that define what correct looks like."
+---
+
+A fixture file is JSON Lines at `.breakline/fixtures/<name>.jsonl`. One object per line.
+
+```json
+{"id": "t01", "model": "gpt-4o-2024-08-06", "messages": [{"role": "user", "content": "I was charged twice, please refund"}], "recorded_output": "{\"intent\": \"refund_request\", \"amount\": 1499}", "expect": {"json_schema": {"type": "object", "required": ["intent", "amount"]}, "label_field": "intent", "numeric_fields": {"amount": 0.01}}}
+```
+
+| Field | Purpose |
+| --- | --- |
+| `id` | Shown next to each regression |
+| `model` | The old model this case belongs to |
+| `messages` | The prompt to replay |
+| `recorded_output` | What the old model returned |
+| `expect.json_schema` | Supports `type`, `required`, `properties`, `enum`, `items` |
+| `expect.label_field` | Field that must match between old and new |
+| `expect.numeric_fields` | Allowed relative drift per field |
+
+Fixtures are written by hand today. Automatic recording is not built yet.
+
+If a model has no fixtures, the report is marked as a warning: there is nothing to prove parity on.
