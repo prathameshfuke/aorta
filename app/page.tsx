@@ -2,14 +2,16 @@ import { ArrowRight, Check, X } from 'lucide-react';
 import Link from 'next/link';
 import { Cta } from '@/components/cta';
 import { DeadlineStrip } from '@/components/deadline-strip';
+import { Diagram } from '@/components/diagram';
 import { JsonLd } from '@/components/json-ld';
+import { BreaklineLogo } from '@/components/logo';
 import { ParityComment, PrCard } from '@/components/pr-comment';
 import { PricingPlans } from '@/components/pricing-plans';
 import { RepoInput } from '@/components/repo-input';
 import { Terminal } from '@/components/terminal';
 import { Dot, Faq, Install, Section, Title, Wrap } from '@/components/ui';
-import { contrast, faq, hero, securityCards, steps } from '@/content/home';
-import { plans } from '@/content/pricing';
+import { contrast, faq, hero, securityCards, skillBlock, steps } from '@/content/home';
+import { plans, pricingNote } from '@/content/pricing';
 import { site } from '@/content/site';
 
 // One real artefact per step, in the same order as `steps`.
@@ -25,6 +27,7 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div aria-hidden className="grid-bg grid-fade absolute inset-0" />
         <Wrap className="relative pb-16 pt-10 sm:pb-24 sm:pt-20">
+          <BreaklineLogo className="mb-6 block" />
           <Link href={hero.pill.href} className="inline-flex min-h-11 items-center gap-3 rounded-full border border-line bg-surface py-1 pl-4 pr-3 text-sm hover:border-control">
             <Dot live /><span>{hero.pill.text}</span><ArrowRight size={15} aria-hidden className="shrink-0" />
           </Link>
@@ -56,11 +59,24 @@ export default function Home() {
         </ol>
       </Section>
 
+      <Section>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
+          <div className="min-w-0 lg:sticky lg:top-28">
+            <Title text={skillBlock.title} />
+            <p className="mt-5 max-w-xl text-muted">{skillBlock.body}</p>
+            <p className="mt-6 max-w-xl rounded-lg bg-code p-4 font-mono text-xs text-code-ink"><span className="text-code-dim">you  </span>{skillBlock.prompt}</p>
+            <p className="mt-4 max-w-xl text-sm text-muted">{skillBlock.note}</p>
+            <Link href="/docs/skill" className="link mt-4 inline-flex min-h-11 items-center">Install the skill</Link>
+          </div>
+          <Diagram name="workflow" />
+        </div>
+      </Section>
+
       <Section id="proof" className="bg-subtle">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[2fr_3fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <Title text="Read the proof before you merge." />
-            <p className="mt-5 text-muted">Every Breakline pull request carries a parity report. It replays your saved prompts on both models and names each case that changed.</p>
+            <p className="mt-5 text-muted">Breakline writes a parity report for your pull request. It replays your saved prompts on both models and names each case that changed.</p>
             <Link href="/docs/fixtures" className="link mt-4 inline-flex min-h-11 items-center">How fixtures work</Link>
           </div>
           <ParityComment />
@@ -88,7 +104,7 @@ export default function Home() {
       </Section>
 
       <Section>
-        <Title text="Your code stays yours." />
+        <Title text="You stay in control." />
         <ul className="mt-12 grid gap-4 md:grid-cols-3">
           {securityCards.map((c) => (
             <li key={c.title} data-reveal className="rounded-lg border border-line bg-surface p-6"><h3 className="text-h3">{c.title}</h3><p className="mt-3 text-sm text-muted">{c.body}</p></li>
@@ -98,7 +114,8 @@ export default function Home() {
       </Section>
 
       <Section>
-        <Title text="Priced per repository." className="mb-12" />
+        <Title text="Priced per repository." />
+        <p className="mb-12 mt-5 max-w-2xl text-muted">{pricingNote}</p>
         <PricingPlans />
         <Link href="/pricing" className="link mt-6 inline-flex min-h-11 items-center">Compare plans and see INR prices</Link>
       </Section>
@@ -113,7 +130,7 @@ export default function Home() {
       <Cta />
 
       <JsonLd data={{
-        '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: `${site.company} ${site.product}`, applicationCategory: 'DeveloperApplication', operatingSystem: 'GitHub Actions', description: site.description, url: site.url,
+        '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: `${site.company} ${site.product}`, applicationCategory: 'DeveloperApplication', operatingSystem: 'macOS, Linux', description: site.description, url: site.url,
         offers: plans.map((p) => ({ '@type': 'Offer', name: p.name, price: p.usd.replace('$', ''), priceCurrency: 'USD' })),
       }} />
     </>

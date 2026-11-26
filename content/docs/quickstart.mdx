@@ -1,23 +1,32 @@
 ---
 title: "Quickstart"
-description: "Scan a repository, then patch it and check parity."
+description: "Scan a repository, plan a patch and check parity."
 ---
 
 > Breakline is in early development. Commands and file formats may change.
 
-## 1. Scan
+Using Claude? [Install the skill](/docs/skill) and ask it. These are the same steps by hand. You need Python 3.10 or newer.
 
-Run the scanner at the root of your repository. It reads files and changes nothing.
+## 1. Get it
 
 ```bash
-npx breakline scan .
+git clone https://github.com/aorta-labs/breakline
+python3 -m pip install pyyaml
+```
+
+## 2. Scan
+
+The scanner reads files and changes nothing.
+
+```bash
+python3 breakline/breakline/scripts/scan.py path/to/repo
 ```
 
 Each finding shows the file, line, model or API, effective date and days left.
 
-## 2. Choose replacements
+## 3. Choose replacements
 
-Add `.breakline/policy.yaml` and map each retiring model to the one you want to test.
+Add `.breakline/policy.yaml` to your repository and map each retiring model to the one you want to test.
 
 ```yaml
 replacements:
@@ -27,15 +36,28 @@ rules:
     action: allow
 ```
 
-## 3. Add fixtures
+## 4. Plan
 
-Save a few real prompts and the outputs you rely on in `.breakline/fixtures/`. See [Fixtures](/docs/fixtures).
+This writes `patch.diff` and `result.json` under `.breakline/out/`. No source file changes.
 
-## 4. Run
+```bash
+python3 breakline/breakline/scripts/plan_patch.py path/to/repo
+```
+
+## 5. Prove
+
+Save real prompts and the outputs you rely on as [fixtures](/docs/fixtures), add [prices](/docs/prices), then replay them. Live parity spends tokens on your account.
 
 ```bash
 export OPENAI_API_KEY=...
-npx breakline run . --live --out breakline-out
+python3 breakline/breakline/scripts/parity.py path/to/repo --live
 ```
 
-This writes `pr_body.md`, `patch.diff` and `result.json`. Your files stay unchanged unless you add `--write`.
+## 6. Apply and report
+
+Read the diff first. Then write the `allow` sites and the report.
+
+```bash
+python3 breakline/breakline/scripts/plan_patch.py path/to/repo --apply
+python3 breakline/breakline/scripts/report.py path/to/repo
+```

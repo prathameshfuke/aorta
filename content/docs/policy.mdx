@@ -15,7 +15,7 @@ rules:                       # first match wins; default is ask
   - match: {path: "app/billing/*"}
     action: deny             # report it, never edit it
   - match: {provider: anthropic}
-    action: ask              # a human approves before merge
+    action: ask              # written only after you approve
   - match: {path: "*"}
     action: allow
 
@@ -31,7 +31,7 @@ parity:
 | Action | Behaviour |
 | --- | --- |
 | `allow` | Patch the call site |
-| `ask` | Patch it, and require human approval before merge |
+| `ask` | Plan it, and write it only after you approve it |
 | `deny` | Report it and leave the file untouched |
 
 ## Thresholds

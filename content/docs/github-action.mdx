@@ -1,9 +1,11 @@
 ---
 title: "GitHub Action"
-description: "Run Breakline weekly on your own runner."
+description: "Check weekly on your own runner."
 ---
 
-> The package source below is a placeholder until the first public release.
+> This is an example workflow built on the scripts, not a published Action. Test it on your repository before relying on it.
+
+It scans, plans and replays your fixtures, then adds the report to the job summary. It does not push or open a pull request. A parity failure fails the job.
 
 ```yaml
 name: breakline
@@ -12,21 +14,29 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write        # push the breakline/* branch
-  pull-requests: write
+  contents: read
 
 jobs:
-  migrate:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 22}
-      - name: Scan, patch and check parity
+      - name: Get Breakline
+        run: |
+          git clone --depth 1 https://github.com/aorta-labs/breakline "$RUNNER_TEMP/breakline"
+          python3 -m pip install pyyaml
+      - name: Scan, plan and check parity
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: npx breakline run . --write --live --out breakline-out
+        run: |
+          S="$RUNNER_TEMP/breakline/breakline/scripts"
+          python3 "$S/scan.py" .
+          python3 "$S/plan_patch.py" .
+          python3 "$S/parity.py" . --live
+      - name: Report
+        if: always()
+        run: |
+          python3 "$RUNNER_TEMP/breakline/breakline/scripts/report.py" . || true
+          cat .breakline/out/pr_body.md >> "$GITHUB_STEP_SUMMARY" || true
 ```
-
-Exit code `2` means parity failed. Open the pull request as a draft in that case.

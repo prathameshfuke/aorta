@@ -31,7 +31,9 @@ export function PricingPlans({ toggle = false }: { toggle?: boolean }) {
             <p className="mt-4 text-h2 tabular-nums"><Price usd={p.usd} inr={p.inr} /></p>
             <p className="min-h-6 text-sm text-muted">{p.unit}</p>
             <ul className="dots mt-5 flex-1 text-sm">{p.includes.map((i) => <li key={i}>{i}</li>)}</ul>
-            <Link href={site.installUrl} className={`btn mt-6 ${p.name === 'Pro' ? 'btn-primary' : 'btn-quiet'}`}>{p.name === 'Free' ? 'Start free' : `Choose ${p.name}`}</Link>
+            {p.name === 'Free'
+              ? <Link href={site.installUrl} className="btn btn-primary mt-6">Get the skill</Link>
+              : <p className="mt-6 flex min-h-11 items-center justify-center rounded border border-dashed border-line text-sm text-muted">Not on sale yet</p>}
           </article>
         ))}
       </div>

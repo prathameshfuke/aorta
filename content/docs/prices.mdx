@@ -11,4 +11,4 @@ gpt-4o-2024-08-06: {input_per_1m: 2.50, output_per_1m: 10.00}
 gpt-5.4-mini:      {input_per_1m: 0.40, output_per_1m: 1.60}
 ```
 
-A model missing from the file is costed at zero, so add both the old and the new model.
+If either model is missing from the file, the cost check cannot run and the report is marked as a warning.

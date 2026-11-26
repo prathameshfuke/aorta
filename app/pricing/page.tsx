@@ -1,10 +1,10 @@
 import { Check, Minus } from 'lucide-react';
 import { PricingPlans } from '@/components/pricing-plans';
 import { Faq, PageHead, Section, Title, Wrap } from '@/components/ui';
-import { comparison, plans, pricingFaq } from '@/content/pricing';
+import { comparison, plans, pricingFaq, pricingNote } from '@/content/pricing';
 import { pageMeta } from '@/lib/meta';
 
-const intro = 'Start free on public repositories. Pay when you want Breakline to watch private ones.';
+const intro = pricingNote;
 export const metadata = pageMeta('/pricing', 'Pricing', intro);
 
 export default function Pricing() {

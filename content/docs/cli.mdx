@@ -1,32 +1,36 @@
 ---
-title: "CLI"
-description: "Commands, flags and exit codes."
+title: "Scripts"
+description: "The five scripts, their flags and exit codes."
 ---
 
-## Commands
+Run them with `python3`, from any directory. Each prints JSON on stdout and text on stderr.
 
-```bash
-npx breakline scan <repo>   # list affected call sites
-npx breakline run <repo>    # scan, patch, replay, write the report
-```
+| Script | What it does |
+| --- | --- |
+| `scan.py <repo>` | Lists retiring calls, soonest deadline first |
+| `verify_dates.py` | Lists registry dates still marked unverified |
+| `plan_patch.py <repo>` | Writes the diff. Changes source files only with `--apply` |
+| `parity.py <repo>` | Replays fixtures. Needs `--live` or `--simulated` |
+| `report.py <repo>` | Writes `pr_body.md` |
 
-## Options
+## Flags
 
-| Flag | Command | Effect |
+| Flag | Script | Effect |
 | --- | --- | --- |
-| `--fail-on-findings` | `scan` | Exit with code 1 when anything is found |
-| `--live` | `run` | Replay fixtures against real model endpoints |
-| `--write` | `run` | Apply the patch to your files |
-| `--out <dir>` | `run` | Output directory, default `breakline-out` |
-| `--registry <file>` | both | Use your own change registry (place before the command) |
-| `--today <date>` | both | Override today's date (place before the command) |
+| `--replace OLD=NEW` | `plan_patch.py` | Choose a replacement for one run |
+| `--apply` | `plan_patch.py` | Write the `allow` sites |
+| `--include-ask` | `plan_patch.py` | With `--apply`, also write the `ask` sites |
+| `--live` | `parity.py` | Call the real models |
+| `--simulated` | `parity.py` | Offline demo. No model is called and it proves nothing |
+| `--registry <file>` | all | Use your own change registry |
+| `--today <date>` | all | Override the date |
 
-Without `--live`, `run` uses a simulator for offline demos. Its results say nothing about a real model.
+Run any script with `--help` for the rest.
 
 ## Exit codes
 
 | Code | Meaning |
 | --- | --- |
-| `0` | Completed, no parity failure |
-| `1` | Findings present and `--fail-on-findings` set |
+| `0` | Completed |
 | `2` | Parity failed: keep the pull request in draft |
+| `3` | Configuration error. The message says what to fix |

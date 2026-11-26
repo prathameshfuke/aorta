@@ -2,7 +2,7 @@
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { nav, site } from '@/content/site';
+import { nav } from '@/content/site';
 import { Logo } from './logo';
 import { ThemeToggle } from './theme-toggle';
 import { Install } from './ui';
@@ -19,7 +19,6 @@ export function Nav() {
         <nav aria-label="Main" className="ml-4 hidden gap-1 lg:flex">{links}</nav>
         <div className="ml-auto flex items-center gap-1">
           <ThemeToggle />
-          <Link href={site.signInUrl} className="nav-link hidden lg:inline-flex">Sign in</Link>
           <Install className="ml-2 hidden sm:inline-flex" />
           {/* key closes the menu after navigation */}
           <details key={path} className="group lg:hidden">
@@ -28,7 +27,6 @@ export function Nav() {
             </summary>
             <nav aria-label="Mobile" className="absolute inset-x-0 top-16 flex flex-col border-b border-line bg-bg px-gutter pb-4 pt-2">
               {links}
-              <Link href={site.signInUrl} className="nav-link">Sign in</Link>
               <Install className="mt-3 sm:hidden" />
             </nav>
           </details>

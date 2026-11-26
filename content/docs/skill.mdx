@@ -1,0 +1,54 @@
+---
+title: "Claude skill"
+description: "Run Breakline from Claude Code, the Claude apps or the Agent SDK."
+---
+
+The source is public at [github.com/aorta-labs/breakline](https://github.com/aorta-labs/breakline). [Download the zip](https://github.com/aorta-labs/breakline/raw/main/breakline.skill.zip).
+
+Breakline is also an [Agent Skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview). Claude loads it when you ask about a retiring or deprecated model, then follows a fixed workflow. Python scripts do the work. Claude explains, asks and drafts. The scripts decide.
+
+## What Claude does
+
+1. Checks for `.breakline/policy.yaml` and fixtures, and helps you write them.
+2. Checks the retirement dates against the provider's own page, and says which are confirmed.
+3. Scans the repo and lists every call by deadline, soonest first.
+4. Asks which model replaces each one. It does not invent a replacement.
+5. Plans the patch and shows the diff. Nothing is written yet.
+6. Replays your fixtures on both models and reports the parity table.
+7. Applies the patch after you approve it, and writes the pull request report.
+
+## Install
+
+**Claude Code.** Unzip into `~/.claude/skills` for every project, or into `.claude/skills` inside one repo, then start a new session.
+
+```bash
+curl -LO https://github.com/aorta-labs/breakline/raw/main/breakline.skill.zip
+mkdir -p ~/.claude/skills
+unzip breakline.skill.zip -d ~/.claude/skills
+```
+
+**Claude apps.** Upload `breakline.skill.zip` in the app's skills settings.
+
+**Agent SDK.** Put the folder under `.claude/skills/` in the agent's working directory, load project settings, and allow the `Skill` tool.
+
+The scripts need Python 3.10 or newer and PyYAML.
+
+```bash
+python3 -m pip install pyyaml
+```
+
+## Ask it
+
+- our gpt-4o calls die in January, fix them
+- swap claude-opus-4-5 for the new one safely
+- is anything in this repo deprecated?
+- will my code break when gpt-4o-mini is retired?
+
+## Rules it follows
+
+- It never merges, and it opens a draft pull request unless parity passed on real models.
+- It never prints an API key.
+- Its scripts send fixture prompts only to the model endpoints being compared. Claude itself sees any file it opens.
+- It never edits a path your policy denies.
+- It says when a parity run was simulated. A simulated run calls no model and proves nothing.
+- It does not call a result a pass if any threshold failed.

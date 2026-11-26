@@ -37,7 +37,7 @@ export function PageHead({ title, intro, children }: { title: string; intro?: st
 
 export const Install = ({ variant = 'primary', className = '' }: { variant?: 'primary' | 'brand'; className?: string }) => (
   // Full class names, or Tailwind drops them from the build.
-  <Link href={site.installUrl} className={`btn ${variant === 'brand' ? 'btn-brand' : 'btn-primary'} ${className}`}><Github />Install on GitHub</Link>
+  <Link href={site.installUrl} className={`btn ${variant === 'brand' ? 'btn-brand' : 'btn-primary'} ${className}`}><Github />Get the skill</Link>
 );
 
 export const Unverified = () => <span className="badge border-warn text-warn-text">unverified</span>;

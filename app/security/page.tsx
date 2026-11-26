@@ -1,11 +1,11 @@
-import { DataFlow } from '@/components/data-flow';
+import { Diagram } from '@/components/diagram';
 import { PageHead, Section, Title, Wrap } from '@/components/ui';
 import { securityCards } from '@/content/home';
 import { permissions, privacyNotes, stored } from '@/content/security';
 import { site } from '@/content/site';
 import { pageMeta } from '@/lib/meta';
 
-const intro = 'Your code, API keys and prompts never leave your GitHub runner.';
+const intro = 'Aorta receives none of your code, keys or prompts. Claude reads what it opens while running the skill.';
 export const metadata = pageMeta('/security', 'Security', intro);
 
 const Table = ({ label, head, rows }: { label: string; head: string[]; rows: string[][] }) => (
@@ -24,13 +24,14 @@ export default function Security() {
     <>
       <PageHead title="Runs where your code already is." intro={intro} />
       <Wrap className="grid grid-cols-1 gap-12 py-section lg:grid-cols-2 lg:items-center">
-        <DataFlow />
+        <Diagram name="boundary" />
         <ul className="space-y-8">{securityCards.map((c) => <li key={c.title}><h2 className="text-h3">{c.title}</h2><p className="mt-2 text-muted">{c.body}</p></li>)}</ul>
       </Wrap>
       <Section>
-        <Title text="Permissions." />
+        <Title text="Planned GitHub App permissions." />
+        <p className="mt-4 max-w-3xl text-muted">The GitHub App is not published. The skill uses only what your own shell and git login already allow.</p>
         <Table label="GitHub App permissions" head={['Permission', 'Access', 'Why']} rows={permissions.map((p) => [p.scope, p.access, p.why])} />
-        <p className="mt-4 max-w-3xl text-sm text-muted">GitHub cannot scope the contents permission to a branch prefix. Breakline pushes only to breakline/* branches. Add a branch ruleset to have GitHub enforce that.</p>
+        <p className="mt-4 max-w-3xl text-sm text-muted">GitHub cannot scope the contents permission to a branch prefix. The app is designed to push only to breakline/* branches. A branch ruleset would let GitHub enforce that.</p>
       </Section>
       <Section>
         <Title text="What is stored." />

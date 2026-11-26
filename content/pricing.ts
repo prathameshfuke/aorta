@@ -1,3 +1,5 @@
+export const pricingNote = 'The skill is public on GitHub today. Hosted plans are planned and not on sale yet.';
+
 export const plans = [
   { name: 'Free', usd: '$0', inr: '₹0', unit: '', includes: ['Public repos', '1 private repo scan'] },
   { name: 'Pro', usd: '$49', inr: '₹3,999', unit: 'per repo / month', includes: ['Continuous watch', 'Auto-PRs', 'Parity reports'] },
@@ -24,7 +26,7 @@ export const comparison: { feature: string; in: [boolean | string, boolean | str
 // ponytail: assumes Team includes everything in Pro. Confirm before launch.
 
 export const pricingFaq = [
-  { q: 'Who pays for the model calls during parity?', a: 'You do. Fixtures replay with your own API keys on your runner, so provider charges go to your account.' },
+  { q: 'Who pays for the model calls during parity?', a: 'You do. Fixtures replay with your own API keys on your machine or runner, so provider charges go to your account.' },
   { q: 'What counts as a repo?', a: 'One GitHub repository. Pro is billed for each repository Breakline watches. Team covers up to 20.' },
   { q: 'Which currency am I billed in?', a: 'Prices are listed in USD and INR. Use the toggle to compare. Taxes are not included in the listed prices.' },
   { q: 'What is Deadline Rescue?', a: 'A one-off engagement where we work through the migration with you before a retirement date. The price within the range depends on the size of the work.' },

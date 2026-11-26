@@ -12,7 +12,7 @@ const Status = ({ s }: { s: keyof typeof kinds }) => {
 const Bot = () => (
   <p className="flex flex-wrap items-center gap-2 text-sm">
     <span className="grid size-7 place-items-center rounded-full border border-line bg-surface"><Dot /></span>
-    <strong className="font-semibold">breakline</strong><span className="badge border-line text-muted">bot</span><span className="text-muted">commented</span>
+    <strong className="font-semibold">breakline</strong><span className="text-muted">pr_body.md</span>
   </p>
 );
 

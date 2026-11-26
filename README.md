@@ -21,7 +21,7 @@ Everything you would normally change is in `content/`.
 
 | File | What it holds |
 | --- | --- |
-| `site.ts` | URLs, emails, install and sign-in links, social links, navigation |
+| `site.ts` | URLs, emails, skill repo link, social links, navigation |
 | `deadlines.ts` | Retirements: home strip, Radar, detail pages, sitemap, social images |
 | `home.ts` | Hero, terminal, steps, parity report, FAQ |
 | `pricing.ts` | Plans, comparison table, pricing FAQ |
@@ -51,15 +51,14 @@ If GitHub Pages is still publishing this repository from `main`, turn it off: th
 ## Before launch
 
 - [ ] Real domain, contact and security emails (`content/site.ts` uses `.example`)
-- [ ] GitHub App install and sign-in URLs (both point to the install guide today)
-- [ ] GitHub, X, LinkedIn and status links
+- [ ] X, LinkedIn and status links
+- [ ] Publish the GitHub App and hosted plans, or keep them marked as not available
 - [ ] Founder name, photo and story (`content/about.ts`)
 - [ ] Lawyer review of privacy and terms, and a retention period for account data
-- [ ] Publish the `breakline` npm package, or change the `npx` commands (the current proof of concept is Python)
 - [ ] Confirm which plan features include which (`content/pricing.ts` assumes Team includes Pro)
 
 There are no customer logos, testimonials or usage numbers on the site. Add them only when they are real.
 
 ## Structure
 
-`app/` routes, `components/` UI, `content/` data, `lib/` helpers, `public/brand/` logo files copied from `logo/`. `breakline/` is the product's own code and is not part of the website build.
+`app/` routes, `components/` UI, `content/` data, `lib/` helpers, `public/brand/` logo files copied from `logo/` (Aorta) and `logo/breakline/`. `public/diagrams/` is copied from the skill’s `docs/`. `breakline/` is the product's own code and is not part of the website build.
