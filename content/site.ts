@@ -18,13 +18,12 @@ export const site = {
 export const nav = [
   { href: '/radar', label: 'Radar' },
   { href: '/docs', label: 'Docs' },
-  { href: '/pricing', label: 'Pricing' },
   { href: '/security', label: 'Security' },
   { href: '/blog', label: 'Blog' },
 ];
 
 export const footer = [
-  { title: 'Product', links: [{ href: '/radar', label: 'Retirement Radar' }, { href: '/pricing', label: 'Pricing' }, { href: '/blog', label: 'Blog' }, { href: '/about', label: 'About' }] },
+  { title: 'Product', links: [{ href: '/radar', label: 'Retirement Radar' }, { href: '/blog', label: 'Blog' }, { href: '/about', label: 'About' }] },
   { title: 'Docs', links: [{ href: '/docs', label: 'Quickstart' }, { href: '/docs/skill', label: 'Install the skill' }, { href: '/docs/cli', label: 'Scripts' }, { href: '/docs/policy', label: 'Policy file' }, { href: '/docs/github-action', label: 'GitHub Action' }] },
   { title: 'Trust', links: [{ href: '/security', label: 'Security' }, { href: '/privacy', label: 'Privacy' }, { href: '/terms', label: 'Terms' }] },
 ];

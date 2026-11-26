@@ -6,12 +6,10 @@ import { Diagram } from '@/components/diagram';
 import { JsonLd } from '@/components/json-ld';
 import { BreaklineLogo } from '@/components/logo';
 import { ParityComment, PrCard } from '@/components/pr-comment';
-import { PricingPlans } from '@/components/pricing-plans';
 import { RepoInput } from '@/components/repo-input';
 import { Terminal } from '@/components/terminal';
 import { Dot, Faq, Install, Section, Title, Wrap } from '@/components/ui';
 import { contrast, faq, hero, securityCards, skillBlock, steps } from '@/content/home';
-import { plans, pricingNote } from '@/content/pricing';
 import { site } from '@/content/site';
 
 // One real artefact per step, in the same order as `steps`.
@@ -114,13 +112,6 @@ export default function Home() {
       </Section>
 
       <Section>
-        <Title text="Priced per repository." />
-        <p className="mb-12 mt-5 max-w-2xl text-muted">{pricingNote}</p>
-        <PricingPlans />
-        <Link href="/pricing" className="link mt-6 inline-flex min-h-11 items-center">Compare plans and see INR prices</Link>
-      </Section>
-
-      <Section>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr_3fr]">
           <Title text="Questions engineers ask." />
           <Faq items={faq} />
@@ -131,7 +122,7 @@ export default function Home() {
 
       <JsonLd data={{
         '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: `${site.company} ${site.product}`, applicationCategory: 'DeveloperApplication', operatingSystem: 'macOS, Linux', description: site.description, url: site.url,
-        offers: plans.map((p) => ({ '@type': 'Offer', name: p.name, price: p.usd.replace('$', ''), priceCurrency: 'USD' })),
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       }} />
     </>
   );

@@ -11,7 +11,6 @@ export async function pages(): Promise<{ path: string; title: string; hidden?: b
     { path: '/radar', title: 'Retirement Radar' },
     { path: '/radar/scan', title: 'Scan a public repo', hidden: true },
     ...deadlines.map((d) => ({ path: `/radar/${d.slug}`, title: `${d.symbol} retires ${longDate(d.date)}` })),
-    { path: '/pricing', title: 'Pricing' },
     { path: '/security', title: 'Security' },
     ...docs.map((d) => ({ path: d.slug === 'quickstart' ? '/docs' : `/docs/${d.slug}`, title: `Docs: ${d.title}` })),
     { path: '/blog', title: 'Blog' },

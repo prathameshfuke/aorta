@@ -9,10 +9,10 @@ export const stored = [
   { data: 'Prompts and fixtures', kept: 'No', retention: 'Never sent to Aorta' },
   { data: 'Provider API keys', kept: 'No', retention: 'Read from your environment by the scripts' },
   { data: 'Change registry (retirement dates and sources)', kept: 'Public', retention: 'Shipped inside the skill' },
-  { data: 'Account and billing contact', kept: 'No accounts yet', retention: 'To be decided before launch' },
+  { data: 'Account data', kept: 'No', retention: 'There are no accounts' },
 ];
 
 export const privacyNotes = [
-  { title: 'DPDP Act, 2023 (India)', body: 'The only personal data planned is account and billing contact information. A notice, a way to withdraw consent and a grievance contact need to be in place before collection starts.' },
+  { title: 'DPDP Act, 2023 (India)', body: 'The skill has no accounts and sends Aorta nothing. If Aorta starts collecting personal data, a notice, a way to withdraw consent and a grievance contact need to be in place first.' },
   { title: 'GDPR (EU and UK)', body: 'Aorta receives no code or prompts, so it does not process the personal data inside them. Your model providers, including Anthropic when Claude runs the skill, process what is sent to them under your agreement with them. A data processing agreement and a lawful basis for account data still need legal review.' },
 ];

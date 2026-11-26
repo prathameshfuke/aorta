@@ -24,7 +24,6 @@ Everything you would normally change is in `content/`.
 | `site.ts` | URLs, emails, skill repo link, social links, navigation |
 | `deadlines.ts` | Retirements: home strip, Radar, detail pages, sitemap, social images |
 | `home.ts` | Hero, terminal, steps, parity report, FAQ |
-| `pricing.ts` | Plans, comparison table, pricing FAQ |
 | `security.ts`, `about.ts`, `legal.ts` | Those pages |
 | `docs.ts`, `docs/*.mdx` | Docs sidebar order and pages |
 | `blog/*.mdx` | Posts. Front matter: `title`, `description`, `author`, `date`, `draft` |
@@ -52,10 +51,9 @@ If GitHub Pages is still publishing this repository from `main`, turn it off: th
 
 - [ ] Real domain, contact and security emails (`content/site.ts` uses `.example`)
 - [ ] X, LinkedIn and status links
-- [ ] Publish the GitHub App and hosted plans, or keep them marked as not available
+- [ ] Publish the GitHub App, or keep it marked as not available
 - [ ] Founder name, photo and story (`content/about.ts`)
 - [ ] Lawyer review of privacy and terms, and a retention period for account data
-- [ ] Confirm which plan features include which (`content/pricing.ts` assumes Team includes Pro)
 
 There are no customer logos, testimonials or usage numbers on the site. Add them only when they are real.
 
